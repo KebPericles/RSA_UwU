@@ -24,6 +24,7 @@ import java.util.logging.Logger;
  */
 public class RSAE {
     public static final int TAMANO = 512;
+    public static final String GUARDAR = "C:\\Users\\Keb\\Desktop\\pruebasRSA";
     /**
      * @param args the command line arguments
      */
@@ -40,7 +41,7 @@ public class RSAE {
         System.out.println("Que quieres hacer");
         System.out.println("1-----Encriptar");
         System.out.println("2-----Desencriptar");
-        String encodedString;
+        /*String encodedString;
         BigInteger[] cifrado;
         switch(s.nextInt()){
             case 1:
@@ -68,7 +69,9 @@ public class RSAE {
                 String descifrado = rsa.desencriptar(cifrado);
                 System.out.println(descifrado);                
                 break;
-        }
+        }*/
+        Ventana1 ve = new Ventana1();
+        ve.setVisible(true);
     }
     
     public static BigInteger[] decodificar(String encodedString){
@@ -127,7 +130,7 @@ public class RSAE {
             try {
                 int c = nE.read();
                 while(c != -1){
-                    n += (char)c;
+                    e += (char)c;
                     c = nE.read();
                 }
                 
@@ -143,18 +146,8 @@ public class RSAE {
             }
             
             try {
-                int c = nR.read();
-                while(c != -1){
-                    n += (char)c;
-                    c = nR.read();
-                }
-            } catch (IOException ex) {
-                System.out.println("Error en E/S de n");
-            }
-            
-            try {
                 //cerramos el archivo en modo lectura y lo abrimos en modo escritura
-                FileWriter salida = new FileWriter("C:\\Users\\Keb\\Desktop\\encriptado.txt");
+                FileWriter salida = new FileWriter(RSAE.GUARDAR + "\\encriptado.txt");
                 
                 //lo encriptamos y guardamos el archivo
                 BigInteger[] cifrado = rsa.encriptar(mensaje, n, e);
